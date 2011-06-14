@@ -1,3 +1,4 @@
+#encoding:utf8
 from setuptools import setup, find_packages
 import sys, os
 
@@ -22,7 +23,7 @@ setup(name='cremedeflux',
       ],
       entry_points="""
       # -*- Entry points: -*-
-      [cremedeflux-plugins]
-      test-hourly = cdf.tests.plugins.hourly:HourlyPlugin
+      [cremedeflux_plugins]
+      test_hourly = cdf.tests.plugins.hourly:HourlyPlugin
       """,
       )
