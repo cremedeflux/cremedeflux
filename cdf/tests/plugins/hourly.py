@@ -1,0 +1,2 @@
+class HourlyPlugin(object):
+    pass

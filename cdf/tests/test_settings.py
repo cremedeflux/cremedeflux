@@ -1,6 +1,7 @@
 from cStringIO import StringIO
 from textwrap import dedent
 from cdf.settings import SettingsFile
+from cdf.tests.plugins.hourly import HourlyPlugin
 
 
 def settings_file(contents):
@@ -22,6 +23,9 @@ def test_publishers_names_titles():
     
     [publisher:untitled]
 
+    [publisher:]
+    # Unnamed publishers are skipped
+
     [nonpublisher:foo]
     bar = baz
 
@@ -37,3 +41,38 @@ def test_publishers_names_titles():
     assert settings.publishers['public'].title == 'Public stream'
     # Untitled publishers inherit name as title
     assert settings.publishers['untitled'].title == 'untitled'
+
+
+def test_collectors_names_titles_plugins():
+    settings = settings_file("""\
+    [collector:hourly]
+    plugin = test-hourly
+
+    [collector:hourly2]
+    title = every other hourly
+    plugin = test-hourly
+    every = 2
+
+    [collector:noplugin]
+    # Collectors without plugins are skipped
+
+    [collector:]
+    # Unnamed collectors are skipped
+
+    [noncollector:foo]
+
+    [noncollector2]
+    """)
+    assert len(settings.collectors) == 2
+    assert set(settings.collectors.keys()) == {
+        'hourly',
+        'hourly2',
+    }
+    assert settings.collectors['hourly'].title == 'hourly'
+    # Untitled collectors inherit name as title
+    assert settings.collectors['hourly2'].title == 'every other hourly'
+    assert isinstance(settings.collectors['hourly'].plugin, HourlyPlugin)
+    assert isinstance(settings.collectors['hourly2'].plugin, HourlyPlugin)
+    assert settings.collectors['hourly'].plugin.every == 1
+    assert settings.collectors['hourly2'].plugin.every == 2
+    

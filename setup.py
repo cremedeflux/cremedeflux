@@ -22,5 +22,7 @@ setup(name='cremedeflux',
       ],
       entry_points="""
       # -*- Entry points: -*-
+      [cremedeflux-plugins]
+      test-hourly = cdf.tests.plugins.hourly:HourlyPlugin
       """,
       )
