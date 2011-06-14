@@ -22,7 +22,9 @@ class SettingsFile(object):
                 type, name = section.split(':', 1)
             except ValueError:
                 continue
-            if type == 'publisher':
+            if name == '':
+                continue
+            elif type == 'publisher':
                 publisher = Publisher(name, self.cp.items(section))
                 self.publishers[name] = publisher
             else:
