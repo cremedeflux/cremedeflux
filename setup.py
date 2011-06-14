@@ -3,9 +3,9 @@ import sys, os
 
 version = '0.1'
 
-setup(name='CDF',
+setup(name='cremedeflux',
       version=version,
-      description="",
+      description="Crème de Flux: Publish the cream of your lifestream",
       long_description="""\
 """,
       classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
