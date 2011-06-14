@@ -46,15 +46,19 @@ def test_publishers_names_titles():
 def test_collectors_names_titles_plugins():
     settings = settings_file("""\
     [collector:hourly]
-    plugin = test-hourly
+    plugin = test_hourly
 
     [collector:hourly2]
     title = every other hourly
-    plugin = test-hourly
+    plugin = test_hourly
     every = 2
 
     [collector:noplugin]
     # Collectors without plugins are skipped
+
+    [collector:invalidplugin]
+    # Collectors with unloadable plugin names are skipped
+    plugin = nonexistent
 
     [collector:]
     # Unnamed collectors are skipped

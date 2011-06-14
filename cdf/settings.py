@@ -1,4 +1,5 @@
 from ConfigParser import ConfigParser
+from cdf.collector import Collector
 from cdf.publisher import Publisher
 
 
@@ -16,6 +17,7 @@ class SettingsFile(object):
 
     def _parse_cp(self):
         # First create publishers
+        self.collectors = {}
         self.publishers = {}
         for section in self.cp.sections():
             try:
@@ -24,6 +26,10 @@ class SettingsFile(object):
                 continue
             if name == '':
                 continue
+            elif type == 'collector':
+                collector = Collector(name, self.cp.items(section))
+                if collector.plugin is not None:
+                    self.collectors[name] = collector
             elif type == 'publisher':
                 publisher = Publisher(name, self.cp.items(section))
                 self.publishers[name] = publisher
