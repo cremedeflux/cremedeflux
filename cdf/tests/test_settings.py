@@ -21,6 +21,11 @@ def test_publishers_names_titles():
     title = Private stream
     
     [publisher:untitled]
+
+    [nonpublisher:foo]
+    bar = baz
+
+    [nonpublisher2]
     """)
     assert len(settings.publishers) == 3
     assert set(settings.publishers.keys()) == {
