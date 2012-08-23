@@ -18,7 +18,6 @@ class SettingsFile(object):
     def _parse_cp(self):
         # First create publishers
         self.collectors = {}
-        self.publishers = {}
         for section in self.cp.sections():
             try:
                 type, name = section.split(':', 1)
@@ -30,8 +29,5 @@ class SettingsFile(object):
                 collector = Collector(name, self.cp.items(section))
                 if collector.plugin is not None:
                     self.collectors[name] = collector
-            elif type == 'publisher':
-                publisher = Publisher(name, self.cp.items(section))
-                self.publishers[name] = publisher
             else:
                 continue

@@ -23,6 +23,6 @@ setup(name='cremedeflux',
       entry_points="""
       # -*- Entry points: -*-
       [cremedeflux_plugins]
-      test_hourly = cdf.tests.plugins.hourly:HourlyPlugin
+      interval = cdf.plugins.interval:IntervalPlugin
       """,
       )
