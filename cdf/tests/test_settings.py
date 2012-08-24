@@ -41,10 +41,10 @@ def test_collectors_names_titles_plugins():
     [noncollector2]
     """)
     assert len(settings.collectors) == 2
-    assert set(settings.collectors.keys()) == {
+    assert set(settings.collectors.keys()) == set([
         'hourly',
         'hourly2',
-    }
+    ])
     assert settings.collectors['hourly'].title == 'hourly'
     assert settings.collectors['hourly2'].title == 'every other hourly'
     assert isinstance(settings.collectors['hourly'].plugin, IntervalPlugin)
