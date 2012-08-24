@@ -1,6 +1,5 @@
 from ConfigParser import ConfigParser
 from cdf.collector import Collector
-from cdf.publisher import Publisher
 
 
 class SettingsFile(object):
@@ -16,7 +15,6 @@ class SettingsFile(object):
         self._parse_cp()
 
     def _parse_cp(self):
-        # First create publishers
         self.collectors = {}
         for section in self.cp.sections():
             try:
