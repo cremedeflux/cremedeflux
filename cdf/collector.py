@@ -8,7 +8,7 @@ class Collector(object):
         self_config = {}
         plugin_configitems = []
         for key, value in configitems:
-            if key in {'title', 'plugin'}:
+            if key in ('title', 'plugin'):
                 self_config[key] = value
             else:
                 plugin_configitems.append((key, value))
